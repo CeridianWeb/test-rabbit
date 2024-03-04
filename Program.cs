@@ -5,11 +5,11 @@ var container = new Container();
 // Register your dependencies here
 container.Register<IService, Service>();
 
-// Resolve the root object
+// Resolve the root object test the dependencies
 var rootObject = container.Resolve<IRootObject>();
 
 // Use the root object
-rootObject.DoSomething();
+rootObject.DoSomething(); 
 
 public interface IService
 {
