@@ -9,7 +9,7 @@ reviews:
   path_filters:
     - "!**/.xml"
   path_instructions:
-    - path: "**/*/*.cs"
+    - path: "**/*.cs"
       instructions: |
         "Assess the code employing the Microsoft coding standards. Confirm that:
         - The code adhere to C# established best practices.
