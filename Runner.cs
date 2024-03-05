@@ -1,13 +1,17 @@
+using AutoMapper;
 using CommandLine;
 
-public class RootObject : IRootObject
+public class Runner : IRunner
 {
     private readonly ILogger logger;
-    private bool verbose;
+    private readonly IGlobalSettings globalSettings;
+    private readonly IMapper mapper;
 
-    public RootObject(ILogger logger)
+    public Runner(ILogger logger, IGlobalSettings globalSettings, IMapper mapper)
     {
         this.logger = logger;
+        this.globalSettings = globalSettings;
+        this.mapper = mapper;
     }
 
     public void Run(string[] args)
@@ -19,21 +23,23 @@ public class RootObject : IRootObject
             .ParseArguments<Options>(args)
             .WithParsed<Options>(o =>
             {
-                verbose = o.Verbose;
+                globalSettings.Verbose = o.Verbose;
                 if (o.Verbose)
                 {
                     logger.LogInfo($"Verbose output enabled. Current Arguments: -v {o.Verbose}");
-                    logger.LogInfo("Quick Start Example! App is in Verbose mode!");
                 }
                 else
                 {
                     logger.LogInfo($"Current Arguments: -v {o.Verbose}");
-                    logger.LogInfo("Quick Start Example!");
                 }
             });
 
-        // Continue with the rest of your code
+        Test test = new Test();
+        test.Name = "Test Name";
 
+        TestDto testDto = mapper.Map<TestDto>(test);
+
+        logger.LogInfo($"Test Dto Name = {testDto.Name}");
 
         logger.LogInfo("Finished");
     }

@@ -1,4 +1,4 @@
-public interface IRootObject
+public interface IRunner
 {
     void Run(string[] args);
 }
