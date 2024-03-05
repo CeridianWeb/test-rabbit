@@ -14,7 +14,7 @@ reviews:
         "Assess the code employing the Microsoft coding standards. Confirm that:
         - The code adhere to C# established best practices.
         - Code is documented using the C# xml syntax with examples.
-        - Defencive programming is employed to handle edge cases.
+        - Defensive programming is employed to handle edge cases.
         - SOLID principles are adhered to.
         - DI and abstractions are used to facilitate testing."
   auto_review:
