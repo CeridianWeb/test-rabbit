@@ -1,0 +1,30 @@
+language: "en"
+early_access: false
+reviews:
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  path_filters:
+    - "!**/.xml"
+  path_instructions:
+    - path: "**/*/*.cs"
+      instructions: |
+        "Assess the code employing the Microsoft coding standards. Confirm that:
+        - The code adhere to C# established best practices.
+        - Code is documented using the C# xml syntax with examples.
+        - Defensive programming is employed to handle edge cases.
+        - SOLID principles are adhered to.
+        - DI and abstractions are used to facilitate testing."
+  auto_review:
+    enabled: true
+    ignore_title_keywords:
+      - "WIP"
+      - "DO NOT MERGE"
+    drafts: false
+    base_branches:
+      - "develop"
+      - "feature/.*"
+chat:
+  auto_reply: true
