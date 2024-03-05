@@ -8,7 +8,7 @@ public class AutomapperSetup : IAutomapperSetup
         di.container.RegisterDelegate<IMapper>(
             r =>
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<Test, TestDto>());
+                var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());
                 return config.CreateMapper();
             },
             Reuse.Singleton
