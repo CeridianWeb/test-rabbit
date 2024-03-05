@@ -1,5 +1,3 @@
-using Serilog;
-
 public interface ILogger
 {
     void Configure();

@@ -16,7 +16,7 @@ using DryIoc;
 /// </example>
 public class DISetup : IDiSetup
 {
-    public Container container;
+    public IContainer Container { get; set; }
 
     /// <summary>
     /// This method is responsible for setting up the dependency injection container
@@ -24,7 +24,7 @@ public class DISetup : IDiSetup
     /// </summary>
     public DISetup()
     {
-        container = new Container();
+        Container = new Container();
         RegisterDependencies();
     }
 
@@ -50,10 +50,10 @@ public class DISetup : IDiSetup
     public void RegisterDependencies()
     {
         // Register your dependencies here
-        container.Register<IDiSetup, DISetup>();
-        container.Register<IRunner, Runner>();
-        container.Register<ILogger, Logger>();
-        container.Register<IGlobalSettings, GlobalSettings>(Reuse.Singleton);
-        container.Register<IAutomapperSetup, AutomapperSetup>();
+        Container.Register<IDiSetup, DISetup>();
+        Container.Register<IRunner, Runner>();
+        Container.Register<ILogger, Logger>();
+        Container.Register<IGlobalSettings, GlobalSettings>(Reuse.Singleton);
+        Container.Register<IAutomapperSetup, AutomapperSetup>();
     }
 }

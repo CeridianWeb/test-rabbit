@@ -3,9 +3,9 @@ using DryIoc;
 
 public class AutomapperSetup : IAutomapperSetup
 {
-    public void AddRegistrations(DISetup di)
+    public void AddRegistrations(IDiSetup di)
     {
-        di.container.RegisterDelegate<IMapper>(
+        di.Container.RegisterDelegate<IMapper>(
             r =>
             {
                 var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());

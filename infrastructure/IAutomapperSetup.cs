@@ -1,4 +1,6 @@
+using DryIoc;
+
 public interface IAutomapperSetup
 {
-    void AddRegistrations(DISetup di);
+    void AddRegistrations(IDiSetup di);
 }

@@ -5,17 +5,17 @@ var di = new DISetup();
 ConfigureServices(di);
 
 // Resolve the root object test the dependencies
-var rootObject = di.container.Resolve<IRunner>();
+var rootObject = di.Container.Resolve<IRunner>();
 
 // Use the root object
 rootObject.Run(args);
 
 static void ConfigureServices(DISetup di)
 {
-    var logger = di.container.Resolve<ILogger>();
+    var logger = di.Container.Resolve<ILogger>();
     logger.Configure();
 
     //Automapper setup
-    var automapperSetup = di.container.Resolve<IAutomapperSetup>();
+    var automapperSetup = di.Container.Resolve<IAutomapperSetup>();
     automapperSetup.AddRegistrations(di);
 }
