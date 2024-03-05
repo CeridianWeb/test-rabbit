@@ -1,13 +1,14 @@
 using CommandLine;
 
-public class RootObject : IRootObject
+public class Runner : IRootObject
 {
     private readonly ILogger logger;
-    private bool verbose;
+    private readonly IGlobalSettings globalSettings;
 
-    public RootObject(ILogger logger)
+    public Runner(ILogger logger, IGlobalSettings globalSettings)
     {
         this.logger = logger;
+        this.globalSettings = globalSettings;
     }
 
     public void Run(string[] args)
@@ -19,22 +20,16 @@ public class RootObject : IRootObject
             .ParseArguments<Options>(args)
             .WithParsed<Options>(o =>
             {
-                verbose = o.Verbose;
+                globalSettings.Verbose = o.Verbose;
                 if (o.Verbose)
                 {
                     logger.LogInfo($"Verbose output enabled. Current Arguments: -v {o.Verbose}");
-                    logger.LogInfo("Quick Start Example! App is in Verbose mode!");
                 }
                 else
                 {
                     logger.LogInfo($"Current Arguments: -v {o.Verbose}");
-                    logger.LogInfo("Quick Start Example!");
                 }
             });
-
-        // Continue with the rest of your code
-
-
         logger.LogInfo("Finished");
     }
 }

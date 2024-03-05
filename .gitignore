@@ -339,3 +339,5 @@ MigrationBackup/
 
 # Fody
 FodyWeavers.xml
+
+log.txt
