@@ -19,7 +19,7 @@ public class Runner : IRunner
         logger.LogInfo("Started");
 
         //Parse the arguments
-        Parser.Default
+        _ = Parser.Default
             .ParseArguments<Options>(args)
             .WithParsed<Options>(o =>
             {
@@ -32,14 +32,28 @@ public class Runner : IRunner
                 {
                     logger.LogInfo($"Current Arguments: -v {o.Verbose}");
                 }
+
+                switch (o.Mode?.ToLower())
+                {
+                    case "local":
+                        globalSettings.Mode = AppMode.Local;
+                        break;
+                    case "remote":
+                        globalSettings.Mode = AppMode.Remote;
+                        break;
+                    default:
+                        globalSettings.Mode = AppMode.None;
+                        break;
+                }
             });
 
-        Test test = new Test();
+        var test = new Test();
         test.Name = "Test Name";
 
-        TestDto testDto = mapper.Map<TestDto>(test);
+        var testDto = mapper.Map<TestDto>(test);
 
         logger.LogInfo($"Test Dto Name = {testDto.Name}");
+        logger.LogInfo($"Mode = {globalSettings.Mode}");
 
         logger.LogInfo("Finished");
     }
