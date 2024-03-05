@@ -14,7 +14,7 @@ using DryIoc;
 ///    rootObject.Run(args);
 /// </code>
 /// </example>
-public class DISetup
+public class DISetup : IDiSetup
 {
     public Container container;
 
@@ -50,8 +50,10 @@ public class DISetup
     public void RegisterDependencies()
     {
         // Register your dependencies here
-        container.Register<IRootObject, Runner>();
+        container.Register<IDiSetup, DISetup>();
+        container.Register<IRunner, Runner>();
         container.Register<ILogger, Logger>();
         container.Register<IGlobalSettings, GlobalSettings>(Reuse.Singleton);
+        container.Register<IAutomapperSetup, AutomapperSetup>();
     }
 }

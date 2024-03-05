@@ -1,14 +1,17 @@
+using AutoMapper;
 using CommandLine;
 
-public class Runner : IRootObject
+public class Runner : IRunner
 {
     private readonly ILogger logger;
     private readonly IGlobalSettings globalSettings;
+    private readonly IMapper mapper;
 
-    public Runner(ILogger logger, IGlobalSettings globalSettings)
+    public Runner(ILogger logger, IGlobalSettings globalSettings, IMapper mapper)
     {
         this.logger = logger;
         this.globalSettings = globalSettings;
+        this.mapper = mapper;
     }
 
     public void Run(string[] args)
@@ -30,6 +33,14 @@ public class Runner : IRootObject
                     logger.LogInfo($"Current Arguments: -v {o.Verbose}");
                 }
             });
+
+        Test test = new Test();
+        test.Name = "Test Name";
+
+        TestDto testDto = mapper.Map<TestDto>(test);
+
+        logger.LogInfo($"Test Dto Name = {testDto.Name}");
+
         logger.LogInfo("Finished");
     }
 }
